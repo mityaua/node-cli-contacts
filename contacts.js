@@ -44,8 +44,8 @@ async function removeContact(contactId) {
 
     await fs.writeFile(contactsPath, JSON.stringify(filteredContacts, null, 2));
 
-    console.log("\x1b[32m Successfully deleted");
     console.table(filteredContacts);
+    console.log("\x1b[32m Successfully deleted");
   } catch (error) {
     console.error(error.message);
   }
@@ -67,9 +67,9 @@ async function addContact(name, email, phone) {
     const contacts = [...parsedContacts, newContact];
 
     await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
-
-    console.log("\x1b[32m Successfully added");
+    
     console.table(contacts);
+    console.log("\x1b[32m Successfully added");
   } catch (error) {
     console.error(error.message);
   }

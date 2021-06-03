@@ -11,9 +11,9 @@
 ## Добавляем контакт
 > node index.js --action add --name Mango --email mango@gmail.com --phone 322-22-22
 > 
-<a href="https://ibb.co/5KhnhZ1"><img src="https://i.ibb.co/GHQtQmd/3.png" alt="3" border="0"></a>
+<a href="https://ibb.co/nRBrjxj"><img src="https://i.ibb.co/7bQvKsK/3.png" alt="3" border="0"></a>
 
 ## Удаляем контакт
 > node index.js --action remove --id=3
 > 
-<a href="https://ibb.co/C97f9Jj"><img src="https://i.ibb.co/VCSsCHF/4.png" alt="4" border="0"></a>
+<a href="https://ibb.co/3vY1C5p"><img src="https://i.ibb.co/7QNv1xn/4.png" alt="4" border="0"></a>
