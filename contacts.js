@@ -5,7 +5,7 @@ const { customAlphabet } = require("nanoid");
 const newId = customAlphabet("1234567890", 10);
 
 // Полный путь к папке с текущим модулем / папка / файл
-const contactsPath = path.join(__dirname, 'db', 'contacts.json');
+const contactsPath = path.join(__dirname, "db", "contacts.json");
 
 // Получаем и выводим весь список контактов в виде таблицы
 async function listContacts() {
@@ -26,6 +26,11 @@ async function getContactById(contactId) {
     const data = await fs.readFile(contactsPath, "utf8");
     const contacts = JSON.parse(data);
 
+    if (!contacts.includes(contactId)) {
+      console.error("\x1B[31m This contact does not exist");
+      return;
+    }
+
     const contact = contacts.filter((contact) => contact.id === Number(contactId));
 
     return console.table(contact);
@@ -39,6 +44,11 @@ async function removeContact(contactId) {
   try {
     const data = await fs.readFile(contactsPath, "utf8");
     const contacts = JSON.parse(data);
+
+    if (!contacts.includes(contactId)) {
+      console.error("\x1B[31m This contact does not exist");
+      return;
+    }
 
     const filteredContacts = contacts.filter((contact) => contact.id != contactId);
 
@@ -67,7 +77,7 @@ async function addContact(name, email, phone) {
     const contacts = [...parsedContacts, newContact];
 
     await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
-    
+
     console.table(contacts);
     console.log("\x1b[32m Successfully added");
   } catch (error) {
