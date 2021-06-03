@@ -11,7 +11,9 @@ async function listContacts() {
   try {
     const data = await fs.readFile(contactsPath, "utf8");
 
-    return console.table(JSON.parse(data));
+    const list = JSON.parse(data);
+
+    return console.table(list);
   } catch (error) {
     console.error(error.message);
   }
@@ -25,7 +27,7 @@ async function getContactById(contactId) {
 
     const contact = contacts.filter((contact) => contact.id === Number(contactId));
 
-    return console.log(contact);
+    return console.table(contact);
   } catch (error) {
     console.error(error.message);
   }
@@ -40,6 +42,9 @@ async function removeContact(contactId) {
     const filteredContacts = contacts.filter((contact) => contact.id != contactId);
 
     await fs.writeFile(contactsPath, JSON.stringify(filteredContacts, null, 2));
+
+    console.log("\x1b[32m Successfully deleted");
+    console.table(filteredContacts);
   } catch (error) {
     console.error(error.message);
   }
@@ -61,6 +66,9 @@ async function addContact(name, email, phone) {
     contacts.push(contact); // Нужны доп проверки при добавлении?
 
     await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
+
+    console.log("\x1b[32m Successfully added");
+    console.table(contacts);
   } catch (error) {
     console.error(error.message);
   }
