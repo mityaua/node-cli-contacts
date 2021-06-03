@@ -26,11 +26,6 @@ async function getContactById(contactId) {
     const data = await fs.readFile(contactsPath, "utf8");
     const contacts = JSON.parse(data);
 
-    if (!contacts.includes(contactId)) {
-      console.error("\x1B[31m This contact does not exist");
-      return;
-    }
-
     const contact = contacts.filter((contact) => contact.id === Number(contactId));
 
     return console.table(contact);
@@ -45,10 +40,6 @@ async function removeContact(contactId) {
     const data = await fs.readFile(contactsPath, "utf8");
     const contacts = JSON.parse(data);
 
-    if (!contacts.includes(contactId)) {
-      console.error("\x1B[31m This contact does not exist");
-      return;
-    }
 
     const filteredContacts = contacts.filter((contact) => contact.id != contactId);
 
