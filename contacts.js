@@ -4,7 +4,8 @@ const path = require("path");
 const { customAlphabet } = require("nanoid");
 const newId = customAlphabet("1234567890", 10);
 
-const contactsPath = path.join("./db/contacts.json");
+// Полный путь к папке с текущим модулем / папка / файл
+const contactsPath = path.join(__dirname, 'db', 'contacts.json');
 
 // Получаем и выводим весь список контактов в виде таблицы
 async function listContacts() {
@@ -52,7 +53,7 @@ async function removeContact(contactId) {
 
 // Добавялем контакт
 async function addContact(name, email, phone) {
-  const contact = {
+  const newContact = {
     id: Number(newId()),
     name,
     email,
@@ -61,9 +62,9 @@ async function addContact(name, email, phone) {
 
   try {
     const data = await fs.readFile(contactsPath, "utf8");
-    const contacts = JSON.parse(data);
+    const parsedContacts = JSON.parse(data);
 
-    contacts.push(contact); // Нужны доп проверки при добавлении?
+    const contacts = [...parsedContacts, newContact];
 
     await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
 
